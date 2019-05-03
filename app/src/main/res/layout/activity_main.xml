@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:columnCount="2"
+    android:useDefaultMargins="true"
+    android:padding="@dimen/padding_Grid"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/txtBoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_gravity="right|center_vertical"
+        android:text="@string/txtBoy"
+        android:textSize="17sp"
+        android:textStyle="italic" />
+    <!--<TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView2"
+        android:layout_row="0"
+        android:layout_column="1"
+
+        />
+        -->
+    <EditText
+        android:id="@+id/edtBoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="1"
+
+        android:layout_gravity="fill_horizontal"
+        android:digits="0123456789"
+        android:hint="0.0 cm"
+        android:inputType="number"
+        android:maxLength="3"
+        android:padding="@dimen/padding_txt"
+        >
+        <requestFocus/>
+    </EditText>
+    <TextView
+        android:id="@+id/txtBoyDeger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="1"
+        android:padding="@dimen/padding_txt"
+        android:text="0m"
+        android:textSize="25sp" />
+
+
+    <TextView
+        android:id="@+id/txtkilo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+
+        android:layout_column="0"
+        android:layout_gravity="right|center_vertical"
+        android:text="@string/txtKilo"
+        android:textSize="17sp"
+        android:textStyle="italic" />
+
+    <SeekBar
+        android:id="@+id/seekBarKilo"
+        android:layout_width="222dp"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:progress="20"/>
+
+    <TextView
+        android:id="@+id/txtKiloDeger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="3"
+        android:layout_column="1"
+        android:padding="@dimen/padding_txt"
+        android:text="0kg"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/txtCinsiyet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:layout_gravity="right|center_vertical"
+        android:text="@string/txtCinsiyet"
+        android:textSize="17sp"
+        android:textStyle="italic" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupBayBayan"
+        android:layout_height="wrap_content"
+        android:layout_row="4"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:id="@+id/rdioBay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/rdioBay"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="17sp"
+            android:textStyle="italic" />
+
+
+        <RadioButton
+            android:id="@+id/rdioBayan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/rdioBayan"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="17sp"
+            android:textStyle="italic" />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtİdealKilo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="5"
+        android:layout_column="0"
+        android:layout_gravity="right|center_vertical"
+        android:text="@string/txtidealKilo"
+        android:textSize="17sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/txtİdealKiloDeger"
+        android:layout_width="234dp"
+        android:layout_height="wrap_content"
+        android:layout_row="5"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/padding_txt"
+        android:text=""
+        android:textSize="17sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/txtDurum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="6"
+        android:layout_column="0"
+        android:layout_gravity="right|center_vertical"
+        android:text="@string/txtDurum"
+        android:textSize="17sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/txtDurumAcikla"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_row="6"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/padding_txt"
+        android:text=""
+        android:textSize="17sp"
+        android:textStyle="italic" />
+
+
+
+
+        <Button
+            android:id="@+id/btnDevam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="7"
+            android:layout_column="1"
+            android:layout_gravity="right"
+            android:background="@color/colorPrimary"
+            android:text="@string/devam"
+             />
+
+
+
+
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="8"
+        android:layout_column="0" />
+
+
+</GridLayout>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="devam">DEVAM ET</string>
+    <string name="app_name">Vücut Kitle İndeksi</string>
+    <string name="title_activityekran_alarm">Su İçin Alarm</string>
+    <string name="rdioBay">Bay</string>
+    <string name="rdioBayan">Bayan</string>
+    <string name="txtBoy">Boy:</string>
+    <string name="txtKilo">Kilo:</string>
+    <string name="txtCinsiyet">Cinsiyet :</string>
+    <string name="txtidealKilo">ideal Kilonuz:</string>
+    <string name="txtDurum">Durumunuz:</string>
+    <string name="zayif">Zayıfsınız</string>
+    <string name="cokzayif">Çok Zayıfsınız</string>
+    <string name="sagliklikiloagirligi">sağlıklı kilo aralığındasınız</string>
+    <string name="normalkilodanfazla">Normal Kilodan Fazlasınız</string>
+    <string name="fazlakilolu">Fazla Kilolusunuz</string>
+    <string name="cokfazlakilolu">Çok Fazla Kilolusunuz</string>
+    <string name="yüksekrisk">Yüksek Risk Oluşturacak Kadar Kilolusunuz</string>
+    <string name="hastalıklı">Hastalıklı Bir Şekilde Aşırı Kilolu</string>
+    <string name="süperasirikilolu">Süper Aşırı Kilolu</string>
+
+</resources>
