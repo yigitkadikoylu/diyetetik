@@ -1,8 +1,8 @@
 package com.example.yigit.vcutkitlendeksi;
 
 public class AlarmEleman {
-    String saat;
-    int adet;
+    private String saat;
+    private int adet;
 
     public AlarmEleman() {}
 

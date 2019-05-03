@@ -59,6 +59,7 @@
             app:qv_addButtonBackground="@color/colorPrimaryDark"
             app:qv_addButtonTextColor="#ffffff"
             app:qv_minQuantity="1"
+            app:qv_maxQuantity="3"
             app:qv_quantity="1"
             app:qv_quantityDialog="true"
             app:qv_removeButtonBackground="@color/colorAccent"
