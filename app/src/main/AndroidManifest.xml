@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Alarm" android:label="@string/title_activityekran_alarm">
+        <activity android:name=".AlarmKurActivity" android:label="@string/title_activityekran_alarm">
         </activity>
     </application>
 

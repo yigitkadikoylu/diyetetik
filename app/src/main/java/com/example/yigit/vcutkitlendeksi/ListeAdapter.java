@@ -8,16 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import me.himanshusoni.quantityview.QuantityView;
 
-public class ListeAdapter extends ArrayAdapter<AlarmEleman> {
+public class ListeAdapter extends ArrayAdapter<Alarm> {
 
     private Context context;
     private int resource;
 
-    public ListeAdapter(@NonNull Context context, int resource, ArrayList<AlarmEleman> alarm) {
+    public ListeAdapter(@NonNull Context context, int resource, ArrayList<Alarm> alarm) {
         super(context, resource, alarm);
         this.context = context;
         this.resource = resource;
@@ -27,7 +31,7 @@ public class ListeAdapter extends ArrayAdapter<AlarmEleman> {
     @Override
     public View getView(int position, @NonNull View convertView, @NonNull ViewGroup parent) {
 
-        String saat = getItem(position).getSaat();
+        String saat = formatiDegistir(getItem(position).getSaat());
         int adet = getItem(position).getAdet();
 
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -40,5 +44,22 @@ public class ListeAdapter extends ArrayAdapter<AlarmEleman> {
         quantityView.setQuantity(adet);
 
         return convertView;
+    }
+    private String formatiDegistir(String datetime) {
+        String inputPattern = "yyyy-MM-dd HH:mm:ss";
+        String outputPattern = "HH:mm";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern, Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern, Locale.getDefault());
+
+        Date date = null;
+        String sonuc = null;
+
+        try {
+            date = inputFormat.parse(datetime);
+            sonuc = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return sonuc;
     }
 }

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         @Override
         public void onClick(View v) {
             try {
-                Intent intent=new Intent(getApplicationContext(),Alarm.class);
+                Intent intent=new Intent(getApplicationContext(),AlarmKurActivity.class);
                 startActivity(intent);
 
             }catch (Exception e){
