@@ -12,6 +12,12 @@ public class Alarm {
         this.adet = adet;
     }
 
+    public Alarm(int id, String saat, int adet) {
+        this.id = id;
+        this.saat = saat;
+        this.adet = adet;
+    }
+
     public int getId() {
         return id;
     }

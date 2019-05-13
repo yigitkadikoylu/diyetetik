@@ -82,20 +82,48 @@ public class VeritabaniYonetici extends SQLiteOpenHelper {
         return degisenSatir;
     }
 
+    public int miktarGuncelle(Alarm alarm){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(SUTUN_ALARM_MIKTAR, alarm.getAdet());
+
+        int degisenSatir = db.update(TABLO_ALARM, values, SUTUN_ALARM_ID + " = ?",
+                new String[]{String.valueOf(alarm.getId())});
+        db.close();
+        return degisenSatir;
+    }
+
+    public int toplamMiktarGetir(){
+        SQLiteDatabase db = getReadableDatabase();
+        String sorgu = "SELECT sum(" + SUTUN_ALARM_MIKTAR + ") FROM " + TABLO_ALARM +
+                " WHERE date(" + SUTUN_ALARM_ZAMAN + ") = date('now', 'localtime')";
+
+        int toplamAdet = 0;
+        Cursor c = db.rawQuery(sorgu, null);
+        if(c.moveToFirst() && c.getCount() == 1){
+            toplamAdet = c.getInt(c.getColumnIndex("sum(" + SUTUN_ALARM_MIKTAR + ")"));
+        }
+        c.close();
+        return toplamAdet;
+    }
+
     public ArrayList<Alarm> butunAlarmlariGetir(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Alarm> alarmlar = new ArrayList<>();
-        String sorgu = "SELECT * FROM " + TABLO_ALARM;
+        String sorgu = "SELECT * FROM " + TABLO_ALARM + " WHERE date(" + SUTUN_ALARM_ZAMAN +
+                ") = date('now', 'localtime') ORDER BY " + SUTUN_ALARM_ZAMAN;
 
         Log.i("yigit", sorgu);
 
         Cursor c = db.rawQuery(sorgu, null);
         if(c.moveToFirst()){
             do{
+                int id = c.getInt(c.getColumnIndex(SUTUN_ALARM_ID));
                 String tarihSaat = c.getString(c.getColumnIndex(SUTUN_ALARM_ZAMAN));
                 int miktar = c.getInt(c.getColumnIndex(SUTUN_ALARM_MIKTAR));
 
-                Alarm alarm = new Alarm(tarihSaat, miktar);
+                Alarm alarm = new Alarm(id, tarihSaat, miktar);
                 alarmlar.add(alarm);
             }while(c.moveToNext());
         }
