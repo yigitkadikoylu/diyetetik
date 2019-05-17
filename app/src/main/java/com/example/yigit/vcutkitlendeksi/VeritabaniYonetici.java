@@ -132,4 +132,17 @@ public class VeritabaniYonetici extends SQLiteOpenHelper {
         return alarmlar;
     }
 
+    public int sonAlarmIdGetir() {
+        SQLiteDatabase db = getReadableDatabase();
+        int alarmId = 0;
+        String sorgu = "SELECT MAX(" + SUTUN_ALARM_ID + ") FROM " + TABLO_ALARM;
+
+        Cursor c = db.rawQuery(sorgu, null);
+        if(c.moveToFirst() && c.getCount() == 1){
+            alarmId = c.getInt(c.getColumnIndex("MAX(" + SUTUN_ALARM_ID + ")"));
+        }
+        c.close();
+        db.close();
+        return alarmId;
+    }
 }
