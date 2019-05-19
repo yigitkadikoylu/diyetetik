@@ -62,30 +62,21 @@ public class VeritabaniYonetici extends SQLiteOpenHelper {
         return degisenSatir;
     }
 
-    public void alarmSil(Alarm alarm){
+    public void alarmSil(int alarmId){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete(TABLO_ALARM, SUTUN_ALARM_ID, new String[]{String.valueOf(alarm.getId())});
+        db.delete(TABLO_ALARM, SUTUN_ALARM_ID + " = ?", new String[]{String.valueOf(alarmId)});
         db.close();
     }
 
     public int alarmGuncelle(Alarm alarm){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(SUTUN_ALARM_ZAMAN, alarm.getSaat());
-        values.put(SUTUN_ALARM_MIKTAR, alarm.getAdet());
-
-        int degisenSatir = db.update(TABLO_ALARM, values, SUTUN_ALARM_ID + " = ?",
-                new String[]{String.valueOf(alarm.getId())});
-        db.close();
-        return degisenSatir;
-    }
-
-    public int miktarGuncelle(Alarm alarm){
-        SQLiteDatabase db = this.getWritableDatabase();
+        String bugunString = new SimpleDateFormat("yyyy-MM-dd ", Locale.getDefault()).format(new Date());
+        String datetime = bugunString + alarm.getSaat() + ":00";
 
         ContentValues values = new ContentValues();
+        values.put(SUTUN_ALARM_ZAMAN, datetime);
         values.put(SUTUN_ALARM_MIKTAR, alarm.getAdet());
 
         int degisenSatir = db.update(TABLO_ALARM, values, SUTUN_ALARM_ID + " = ?",
@@ -144,5 +135,20 @@ public class VeritabaniYonetici extends SQLiteOpenHelper {
         c.close();
         db.close();
         return alarmId;
+    }
+
+    public int idyeGoreAdetGetir(int id){
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sorgu = "SELECT " + SUTUN_ALARM_MIKTAR + " FROM " + TABLO_ALARM + " WHERE " +
+                        SUTUN_ALARM_ID + " = " + id;
+        int adet = 0;
+        Cursor c = db.rawQuery(sorgu, null);
+        if(c.moveToFirst() && c.getCount() == 1){
+            adet = c.getInt(c.getColumnIndex(SUTUN_ALARM_MIKTAR));
+        }
+        db.close();
+        c.close();
+        return adet;
     }
 }

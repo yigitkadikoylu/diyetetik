@@ -23,7 +23,6 @@ public class AlarmKurDialog extends AppCompatDialogFragment {
     TextView bardakAdetiTxt;
     Button alarmEkleBtn;
 
-    int bardakSayisi;
     int saat;
     int dakika;
 
@@ -51,8 +50,7 @@ public class AlarmKurDialog extends AppCompatDialogFragment {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                bardakSayisi = 1 + progress;
-                bardakAdetiTxt.setText(String.valueOf(bardakSayisi));
+                bardakAdetiTxt.setText(String.valueOf(progress + 1));
             }
 
             @Override
@@ -62,11 +60,10 @@ public class AlarmKurDialog extends AppCompatDialogFragment {
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-
         alarmEkleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= 23 ) {
+            if (Build.VERSION.SDK_INT >= 23 ) {
                 saat = timePicker.getHour();
                 dakika = timePicker.getMinute();
             }
@@ -74,7 +71,7 @@ public class AlarmKurDialog extends AppCompatDialogFragment {
                 saat = timePicker.getCurrentHour();
                 dakika = timePicker.getCurrentMinute();
             }
-                listener.alarmBilgisiGetir(saat, dakika, bardakSayisi);
+                listener.alarmBilgisiGetir(saat, dakika, seekBar.getProgress() + 1);
                 dismiss();
             }
         });

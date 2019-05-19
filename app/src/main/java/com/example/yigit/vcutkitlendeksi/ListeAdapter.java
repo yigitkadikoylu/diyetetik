@@ -42,29 +42,10 @@ public class ListeAdapter extends ArrayAdapter<Alarm> {
         convertView = inflater.inflate(R.layout.alarm_liste_elemani, parent, false);
 
         TextView saatTV = convertView.findViewById(R.id.txt_saat);
-        QuantityView quantityView = convertView.findViewById(R.id.quantityView);
-
-        quantityView.setOnQuantityChangeListener(new QuantityView.OnQuantityChangeListener() {
-            @Override
-            public void onQuantityChanged(int oldQuantity, int newQuantity, boolean programmatically) {
-                Log.i("yigit", String.valueOf(newQuantity));
-                Log.i("yigit", String.valueOf(getItem(position).getId()));
-                Alarm alarm = new Alarm();
-                alarm.setAdet(newQuantity);
-                alarm.setId(getItem(position).getId());
-                vy.miktarGuncelle(alarm);
-                //AlarmKurActivity.kalanMiktar = vy.toplamMiktarGetir();
-            }
-
-            @Override
-            public void onLimitReached() {
-                Toast.makeText(getContext(),
-                        "Sağlık açısından tek seferde en fazla 3 bardaklık alarm kurabilirsiniz", Toast.LENGTH_LONG).show();
-            }
-        });
+        TextView miktarTV = convertView.findViewById(R.id.txt_miktar);
 
         saatTV.setText(saat);
-        quantityView.setQuantity(adet);
+        miktarTV.setText(String.valueOf(adet));
 
         return convertView;
     }

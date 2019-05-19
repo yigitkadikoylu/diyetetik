@@ -15,8 +15,11 @@ public class NotificationHelper extends ContextWrapper {
 
     private NotificationManager mManager;
 
-    public NotificationHelper(Context base) {
+    int adet;
+
+    public NotificationHelper(Context base, int adet) {
         super(base);
+        this.adet = adet;
         if (VERSION.SDK_INT >= VERSION_CODES.O) {
             createChannel();
         }
@@ -39,8 +42,8 @@ public class NotificationHelper extends ContextWrapper {
 
     public NotificationCompat.Builder getChannelNotification() {
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
-                .setContentTitle("Alarm!")
-                .setContentText("Your AlarmManager is working.")
-                .setSmallIcon(R.mipmap.ic_launcher);
+                .setContentTitle("Su içme zamanınız geldi")
+                .setContentText(adet + " bardak su için.")
+                .setSmallIcon(R.drawable.ic_damla);
     }
 }

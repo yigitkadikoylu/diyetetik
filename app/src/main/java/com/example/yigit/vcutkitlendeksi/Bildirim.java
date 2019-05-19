@@ -13,7 +13,8 @@ public class Bildirim extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationHelper notificationHelper = new NotificationHelper(context);
+        int adet = intent.getIntExtra("adet", 1);
+        NotificationHelper notificationHelper = new NotificationHelper(context, adet);
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
         notificationHelper.getManager().notify(1, nb.build());
     }
