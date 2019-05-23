@@ -70,6 +70,7 @@ public class AlarmKurActivity extends AppCompatActivity  implements AlarmKurDial
                 bundle.putInt("id", alarm.getId());
                 bundle.putString("saat", alarm.getSaat());
                 bundle.putInt("adet", alarm.getAdet());
+                bundle.putInt("kalan_miktar",kalanMiktar);
                 DialogFragment dialog = new AlarmGuncelleSilDialog();
                 dialog.setArguments(bundle);
                 dialog.show(AlarmKurActivity.this.getSupportFragmentManager(), "Alarm Düzenle - Sil");
@@ -96,14 +97,15 @@ public class AlarmKurActivity extends AppCompatActivity  implements AlarmKurDial
 
     @Override
     public void alarmBilgisiGetir(int gelenSaat, int gelenDakika, int bardakSayisi) {
+        if(kalanMiktar < bardakSayisi){
+            Toast.makeText(AlarmKurActivity.this, "Daha fazla su içmeyin.", Toast.LENGTH_LONG).show();
+            return;
+        }
         Calendar suankiZaman = Calendar.getInstance();
         Calendar secilenZaman = Calendar.getInstance();
         secilenZaman.set(Calendar.HOUR_OF_DAY, gelenSaat);
         secilenZaman.set(Calendar.MINUTE, gelenDakika);
         secilenZaman.set(Calendar.SECOND, 0);
-        Log.i("mert", gelenSaat + ":" + gelenDakika);
-        Log.i("mert", suankiZaman.get(Calendar.HOUR_OF_DAY) + ":" + suankiZaman.get(Calendar.MINUTE) + " - " +
-                secilenZaman.get(Calendar.HOUR_OF_DAY) + ":" + secilenZaman.get(Calendar.MINUTE));
         if(suankiZaman.getTimeInMillis() <= secilenZaman.getTimeInMillis()) {
             String saat = DateFormat.getTimeInstance(DateFormat.SHORT).format(secilenZaman.getTime());
             Alarm alarm = new Alarm(saat, bardakSayisi);
@@ -118,7 +120,7 @@ public class AlarmKurActivity extends AppCompatActivity  implements AlarmKurDial
             adapter = new ListeAdapter(AlarmKurActivity.this, R.layout.alarm_liste_elemani, alarmlar);
             liste.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            kalanMiktar -= vy.toplamMiktarGetir();
+            kalanMiktar -= bardakSayisi;
             kalanMiktarTV.setText(String.valueOf(kalanMiktar));
         }else {
             Toast.makeText(AlarmKurActivity.this, "Seçilen zaman geride kaldı.", Toast.LENGTH_LONG).show();
@@ -132,5 +134,7 @@ public class AlarmKurActivity extends AppCompatActivity  implements AlarmKurDial
         adapter = new ListeAdapter(AlarmKurActivity.this, R.layout.alarm_liste_elemani, alarmlar);
         liste.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        finish();
+        startActivity(getIntent());
     }
 }

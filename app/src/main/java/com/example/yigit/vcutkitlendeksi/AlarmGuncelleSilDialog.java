@@ -1,9 +1,14 @@
 package com.example.yigit.vcutkitlendeksi;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -15,6 +20,7 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,11 +36,13 @@ public class AlarmGuncelleSilDialog extends AppCompatDialogFragment {
     TextView bardakAdetiTxt;
     Button alarmSilBtn, alarmGuncelleBtn;
 
+
     VeritabaniYonetici vy;
 
     int alarmId;
     String zaman;
     int adet;
+    int kalanMiktar;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -57,6 +65,7 @@ public class AlarmGuncelleSilDialog extends AppCompatDialogFragment {
         alarmId = bundle.getInt("id");
         zaman = bundle.getString("saat");
         adet = bundle.getInt("adet");
+        kalanMiktar=bundle.getInt("kalan_miktar");
 
         int gelenSaat = formatiDegistir(zaman)[0];
         int gelenDakika = formatiDegistir(zaman)[1];
@@ -88,6 +97,7 @@ public class AlarmGuncelleSilDialog extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 vy.alarmSil(alarmId);
+                alarmIptalEt();
                 dismiss();
             }
         });
@@ -95,6 +105,10 @@ public class AlarmGuncelleSilDialog extends AppCompatDialogFragment {
         alarmGuncelleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (kalanMiktar<(seekBar.getProgress()+1)-adet){
+                    Toast.makeText(getContext(),"İçmeniz gereken su miktarı aşıldı.",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 int saat;
                 int dakika;
                 if (Build.VERSION.SDK_INT >= 23 ) {
@@ -116,6 +130,7 @@ public class AlarmGuncelleSilDialog extends AppCompatDialogFragment {
                 alarm.setSaat(guncellenenSaat);
                 alarm.setAdet(seekBar.getProgress() + 1);
                 vy.alarmGuncelle(alarm);
+                alarmGuncelle(secilenZaman, alarmId);
                 dismiss();
             }
         });
@@ -149,5 +164,27 @@ public class AlarmGuncelleSilDialog extends AppCompatDialogFragment {
             e.printStackTrace();
         }
         return sonuclar;
+    }
+
+    private void alarmIptalEt(){
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent myIntent = new Intent(getContext().getApplicationContext(), Bildirim.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                getContext().getApplicationContext(), alarmId, myIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.cancel(pendingIntent);
+    }
+
+    private void alarmGuncelle(Calendar secilenZaman, int requestCode) {
+        AlarmManager alarmManager = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), Bildirim.class);
+        intent.putExtra("adet", vy.idyeGoreAdetGetir(requestCode));
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), requestCode, intent, 0);
+        if (android.os.Build.VERSION.SDK_INT >= 19) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, secilenZaman.getTimeInMillis(), pendingIntent);
+        } else {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, secilenZaman.getTimeInMillis(), pendingIntent);
+        }
     }
 }

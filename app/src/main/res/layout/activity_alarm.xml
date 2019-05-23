@@ -27,7 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Kalan miktar: " />
+            android:text="Kalan miktar: "
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/txt_kalan_miktar"
@@ -35,14 +36,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
-            android:text="15" />
+            android:text="15"
+            android:textSize="24sp"
+            android:textColor="@android:color/holo_blue_dark"/>
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="start"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
+            android:paddingTop="5dp"
             app:srcCompat="@drawable/bardak" />
 
         <TextView
@@ -51,14 +56,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
-            android:text="(" />
+            android:text="("
+            android:textSize="20sp"/>
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="start"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
+            android:paddingTop="5dp"
             app:srcCompat="@drawable/bardak" />
 
         <TextView
@@ -67,7 +75,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
-            android:text="= 200ml )" />
+            android:text="= 200ml )"
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <ListView

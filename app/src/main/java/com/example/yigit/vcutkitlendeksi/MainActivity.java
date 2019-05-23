@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
     private RadioButton rdioBay,rdioBayan;
     private boolean erkekmi=true;
     private double boy=0.0;
-    private int kilogram=50;
+    private int kilogram=30;
     private Button btnDevam;
     private Button.OnClickListener btnDevamOlayisleyicisi= new Button.OnClickListener() {
         @Override

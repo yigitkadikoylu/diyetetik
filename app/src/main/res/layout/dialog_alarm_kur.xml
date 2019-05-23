@@ -78,6 +78,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker1" />
+        app:layout_constraintTop_toBottomOf="@+id/timePicker1"
+        android:background="@android:color/holo_green_light"/>
 
 </android.support.constraint.ConstraintLayout>
